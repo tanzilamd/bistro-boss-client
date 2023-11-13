@@ -3,7 +3,7 @@ import featuredImg from "./../../../assets/home/featured.jpg";
 
 const Featured = () => {
     return (
-        <section className="bg-featured bg-fixed cover py-8 text-white">
+        <section className="bg-featured bg-fixed cover my-16 py-8 text-white">
             <SectionTitle
                 subHeading={"Check it out"}
                 heading={"Featured Item"}
