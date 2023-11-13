@@ -5,6 +5,7 @@ export default {
         extend: {
             backgroundImage: {
                 chefService: "url('./src/assets/home/chef-service.jpg')",
+                featured: "url('./src/assets/home/featured.jpg')",
             },
             fontFamily: {
                 inter: "'Inter', sans-serif",
