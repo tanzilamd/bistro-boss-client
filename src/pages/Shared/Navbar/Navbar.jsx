@@ -56,7 +56,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-sm bg-white">Login</a>
+                    <Link to={"/login"} className="btn btn-sm bg-white">
+                        Login
+                    </Link>
                 </div>
             </div>
         </>
