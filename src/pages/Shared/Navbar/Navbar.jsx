@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
     const navOptions = (
         <>
             <li>
-                <Link to={"/"}>Home</Link>
+                <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>
-                <Link to={"/menu"}>Our Menu</Link>
+                <NavLink to={"/menu"}>Our Menu</NavLink>
             </li>
             <li>
-                <Link to={"/order/salad"}>Order Food</Link>
+                <NavLink to={"/order/salad"}>Order Food</NavLink>
             </li>
         </>
     );
@@ -50,10 +51,12 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+                    <ul className="menu menu-horizontal px-1 font-bold activeNav">
+                        {navOptions}
+                    </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <a className="btn btn-sm bg-white">Login</a>
                 </div>
             </div>
         </>

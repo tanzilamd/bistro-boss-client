@@ -1,0 +1,8 @@
+.activeNav li a.active {
+    color: #eeff25 !important;
+    background-color: transparent !important;
+}
+
+.activeNav li a:hover {
+    color: #cdd47d !important;
+}
