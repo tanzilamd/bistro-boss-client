@@ -48,6 +48,10 @@ const AuthProvider = ({ children }) => {
         return () => unSubscribe();
     }, []);
 
+    if (loading) {
+        return <progress className="progress w-56"></progress>;
+    }
+
     const authInfo = { user, loading, createUser, signIn, logOut, userName };
     return (
         <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

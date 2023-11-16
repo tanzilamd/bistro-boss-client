@@ -16,8 +16,17 @@ const Navbar = () => {
             <li>
                 <NavLink to={"/order/salad"}>Order Food</NavLink>
             </li>
+            <li>
+                <NavLink to={"/secret"}>Secret</NavLink>
+            </li>
         </>
     );
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {})
+            .catch((error) => console.log(error));
+    };
     return (
         <>
             <div className="navbar fixed z-10 bg-opacity-40 bg-black text-white max-w-screen-xl">
@@ -60,7 +69,12 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {user ? (
-                        <button className="btn btn-sm bg-white">Logout</button>
+                        <button
+                            onClick={handleLogout}
+                            className="btn btn-sm bg-white"
+                        >
+                            Logout
+                        </button>
                     ) : (
                         <Link to={"/login"} className="btn btn-sm bg-white">
                             Login

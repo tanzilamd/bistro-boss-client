@@ -1,17 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import img1 from "./../../assets/others/authentication2.png";
 import {
     loadCaptchaEnginge,
     LoadCanvasTemplate,
-    LoadCanvasTemplateNoReload,
     validateCaptcha,
 } from "react-simple-captcha";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -23,17 +26,33 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(email, password);
+        signIn(email, password)
+            .then((result) => {
+                navigate(location?.state ? location.state : "/");
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Logged in successfully!",
+                });
+            })
+            .catch((error) => console.log(error));
     };
 
     const handleValidateCaptcha = (e) => {
         e.preventDefault();
-
-        const user_captcha_value = captchaRef.current.value;
-        console.log(user_captcha_value);
+        const user_captcha_value = e.target.value;
 
         if (validateCaptcha(user_captcha_value) == true) {
             setDisabled(false);
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Captcha Validation Done!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
         }
     };
 
@@ -90,20 +109,21 @@ const Login = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    ref={captchaRef}
+                                    // ref={captchaRef}
+                                    onBlurCapture={handleValidateCaptcha}
                                     name="captcha"
                                     placeholder="Enter Captcha Code"
                                     className="input input-bordered"
                                     required
                                 />
-                                <label className="label">
+                                {/* <label className="label">
                                     <button
                                         onClick={handleValidateCaptcha}
                                         className="btn btn-block btn-sm"
                                     >
                                         Validate
                                     </button>
-                                </label>
+                                </label> */}
                             </div>
                             <div className="form-control mt-2">
                                 <input

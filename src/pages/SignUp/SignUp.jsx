@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img1 from "./../../assets/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
@@ -13,12 +13,14 @@ const SignUp = () => {
 
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         createUser(data.email, data.password).then((result) => {
             const loggedUser = result.user;
             userName(data.name);
-            console.log(loggedUser);
+
+            navigate("/");
         });
     };
 
