@@ -14,8 +14,6 @@ const Order = () => {
     const { category } = useParams();
     const initialIndex = categories.indexOf(category);
 
-    console.log(category);
-
     const [tabIndex, setTabIndex] = useState(initialIndex);
 
     const [menu] = useMenu();
