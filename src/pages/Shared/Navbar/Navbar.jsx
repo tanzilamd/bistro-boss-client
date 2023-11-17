@@ -3,9 +3,11 @@ import "./Navbar.css";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
 import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
     const navOptions = (
         <>
             <li>
@@ -24,7 +26,7 @@ const Navbar = () => {
                 <li>
                     <NavLink to={"/"} className="indicator">
                         <span className="indicator-item badge badge-secondary">
-                            2
+                            {cart.length}
                         </span>
                         <p>
                             <FaCartShopping className="text-2xl"></FaCartShopping>
