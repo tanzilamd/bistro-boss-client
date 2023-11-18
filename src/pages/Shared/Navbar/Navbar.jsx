@@ -24,7 +24,7 @@ const Navbar = () => {
             </li>
             {user && (
                 <li>
-                    <NavLink to={"/"} className="indicator">
+                    <NavLink to={"/dashboard/cart"} className="indicator">
                         <span className="indicator-item badge badge-secondary">
                             {cart.length}
                         </span>
