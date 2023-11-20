@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
     const { createUser, userName } = useContext(AuthContext);
@@ -14,13 +16,25 @@ const SignUp = () => {
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit = (data) => {
         createUser(data.email, data.password).then((result) => {
-            const loggedUser = result.user;
-            userName(data.name);
+            const userInfo = {
+                name: data.name,
+                email: data.email,
+            };
 
-            navigate("/");
+            axiosPublic
+                .post("/users", userInfo)
+                .then((res) => {
+                    if (res.data.insertedId) {
+                        userName(data.name);
+
+                        navigate("/");
+                    }
+                })
+                .catch((error) => console.log(error.message));
         });
     };
 
@@ -137,6 +151,8 @@ const SignUp = () => {
                                     </Link>
                                 </p>
                             </label>
+
+                            <SocialLogin></SocialLogin>
                         </form>
                     </div>
                 </div>
