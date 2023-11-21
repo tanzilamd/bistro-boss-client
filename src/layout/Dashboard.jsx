@@ -14,12 +14,15 @@ import {
 } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart();
 
     // Get isAdmin value from database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+
+    // const isAdmin = true;
 
     return (
         <div className="flex font-inter">
